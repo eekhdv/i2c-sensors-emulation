@@ -7,6 +7,9 @@
 namespace eekhdv
 {
     
+/*
+ *
+**/
 struct sensor_configuration
 {
     std::vector<std::pair<std::string, std::string>> sensor_list;

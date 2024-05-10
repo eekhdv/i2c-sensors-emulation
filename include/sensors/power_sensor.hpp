@@ -9,10 +9,16 @@
 namespace eekhdv
 {
 
+/*
+ *
+ *
+ *
+**/
 class power_sensor final : public sensor
 {
 public:
-
+  /// @brief 
+  /// @param list
   power_sensor(std::initializer_list<std::pair<sensor_name, measurement_result>>& list);
 
   ~power_sensor() final override;

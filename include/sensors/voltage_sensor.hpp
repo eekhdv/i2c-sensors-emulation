@@ -8,9 +8,14 @@
 namespace eekhdv
 {
 
+/*
+ *
+**/
 class voltage_sensor final : public sensor
 {
 public:
+  /// @brief
+  /// @param list 
   voltage_sensor(std::initializer_list<std::pair<sensor_name, measurement_result>>& list);
 
   ~voltage_sensor() final override;

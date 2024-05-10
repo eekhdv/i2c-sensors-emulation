@@ -12,7 +12,8 @@ namespace eekhdv
 class temperature_sensor final : public sensor
 {
 public:
-  temperature_sensor() = delete;
+  /// @brief 
+  /// @param
   temperature_sensor(std::initializer_list<std::pair<sensor_name, measurement_result>>& list);
 
   ~temperature_sensor() final override;

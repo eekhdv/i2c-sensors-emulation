@@ -8,9 +8,16 @@
 namespace eekhdv
 {
 
+/*
+ *
+ *
+ *
+**/
 class current_sensor final : public sensor
 {
 public:
+  /// @brief 
+  /// @param list 
   current_sensor(std::initializer_list<std::pair<sensor_name, measurement_result>>& list);
 
   ~current_sensor() final override;
