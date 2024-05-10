@@ -6,5 +6,5 @@ using namespace eekhdv;
 
 std::unique_ptr<sensor> make_sensor(sensor_configuration& cfg)
 {
-    std::make_unique<sensor_impl>(cfg);
+    return std::make_unique<sensor_impl>(cfg);
 }
