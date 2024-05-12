@@ -2,7 +2,7 @@
 # Project setup
 ########################################################################
 cmake_minimum_required(VERSION 3.20)
-project(srsran)
+project(eekhdv)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -31,9 +31,7 @@ include_directories(include/)
 
 # List of directories that contain header files
 set(ALL_HEADER_DIRS
-  app
-  lib
-  include/
+  include
 )
 
 

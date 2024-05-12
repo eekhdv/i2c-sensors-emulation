@@ -1,6 +1,7 @@
 #include <cstdint>
 #include <linux/i2c-dev.h>
 #include <i2c/smbus.h>
+#include <memory>
 
 #include "sensors/sensor_factory.hpp"
 
@@ -32,7 +33,7 @@ int main (int argc, char *argv[])
     }
   };
   
-  std::unique_ptr sensors = eekhdv::make_sensor(cfg);
+  std::unique_ptr<eekhdv::sensor> sensors = eekhdv::sensor_factory::make_sensor(cfg);
 
 
   
