@@ -1,12 +1,10 @@
 /**
  * @file measurement_result.hpp
  *
- * @brief File with measurement_result type
- *
  * @author Edem Khadiev
  * Contact: khadiev.edem@gmail.com
- *
  */
+#pragma once
 
 #include <cstdint>
 #include <string>
@@ -34,6 +32,13 @@ enum class measurement : std::size_t
 class measurement_result
 {
 public:
+
+    measurement_result() : res{ 0 }, dev_addr{} { };
+
+    measurement_result(int64_t res_, const std::string& dev_addr_) : res{res_}, dev_addr{dev_addr_} {}
+
+    measurement_result(const std::string& dev_addr_) : res{0}, dev_addr{dev_addr_} {}
+
     /// @brief 
     /// @return
     int64_t get_result() const { return res; }

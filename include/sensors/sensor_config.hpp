@@ -1,3 +1,9 @@
+/**
+ * @file sensor_config.hpp
+ *
+ * @author Edem Khadiev
+ * Contact: khadiev.edem@gmail.com
+ */
 #pragma once
 
 #include <string>
