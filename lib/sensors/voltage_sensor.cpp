@@ -4,37 +4,31 @@
  * @author Edem Khadiev
  * Contact: khadiev.edem@gmail.com
  */
+#include <iostream>
+
 #include "sensors/voltage_sensor.hpp"
 
 
 using namespace eekhdv;
 
 
-voltage_sensor::voltage_sensor(std::initializer_list<std::pair<sensor_name, measurement_result>>& list)
+void voltage_sensor::measure()
 {
-    for (const auto & [key, value] : list)
+    for (auto & sensor_ : sensors_)
     {
-        voltage_sensors[key] = value;
+      uint8_t rx_buf[8];
+      if (i2c_bus.read(sensor_, 8, rx_buf) == 0)
+      {
+        sensor_.set_last_meas(i2c_comm::bytes_to_int64(rx_buf));
+      }
+      else
+      {
+        std::cout << "Cannot measure " << sensor_.get_sensor_name() << '\n';
+      }
     }
 }
 
-voltage_sensor::~voltage_sensor()
+void voltage_sensor::add_sensor(const sensor_type& sensor)
 {
-    // TODO
-}
-
-void voltage_sensor::measure()
-{
-  
-}
-
-void voltage_sensor::add_sensor(const sensor_name& name, const measurement_result& meas)
-{
-  voltage_sensors[name] = meas;
-}
-
-void voltage_sensor::add_sensor(const sensor_name& name, const std::string& sensor_addr)
-{
-  measurement_result res{sensor_addr};
-  add_sensor(name, res);
+  sensors_.push_back(sensor);
 }

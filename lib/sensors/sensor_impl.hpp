@@ -23,23 +23,23 @@ class sensor_impl final : public sensor
 public:
     /// @brief 
     /// @param sensors 
-    sensor_impl(std::array<std::unique_ptr<sensor>, static_cast<std::size_t>(measurement::MAX_NUM)> sensors) : sensors{ std::move(sensors) }
+    sensor_impl(std::array<std::unique_ptr<sensor>, static_cast<std::size_t>(MEASUREMENTS::MAX_NUM)>& sensors) : sensors_{ std::move(sensors) }
     { }
 
     /// @brief 
-    /// @param cfg
+    /// @param cfg 
+    /// @param temperature_bus 
+    /// @param voltage_bus 
+    /// @param power_bus 
+    /// @param current_bus 
     sensor_impl(const sensor_configuration& cfg);
 
-    ~sensor_impl() final override;
-    
     void measure() final override;
     
-    void add_sensor(const sensor_name&, const measurement_result&) override;
-
-    void add_sensor(const sensor_name&, const std::string&) override;
+    void add_sensor(const sensor_type&) override;
 
 private:
-    std::array<std::unique_ptr<sensor>, static_cast<std::size_t>(measurement::MAX_NUM)> sensors; ///<
+    std::array<std::unique_ptr<sensor>, static_cast<std::size_t>(MEASUREMENTS::MAX_NUM)> sensors_; ///<
 };
 
 } // namespace eekhdv

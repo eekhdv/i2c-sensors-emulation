@@ -6,46 +6,39 @@
  */
 #pragma once
 
-#include <unordered_map>
 #include <vector>
 
-#include "../measurement_result.hpp"
 #include "sensor.hpp"
+#include "i2c/i2c_comm.hpp"
 
 
 namespace eekhdv
 {
 
 /*
- *
- *
- *
+ * Current sensors class
 **/
 class current_sensor final : public sensor
 {
 public:
   /// @brief 
   /// @param list 
-  current_sensor() : current_sensors{} { };
+  current_sensor(uint8_t i2c_bus_) : sensors_{}, i2c_bus{i2c_bus_} { }
 
-  current_sensor(std::initializer_list<std::pair<sensor_name, measurement_result>>& list);
-
-  current_sensor(std::vector<std::pair<sensor_name, measurement_result>>& list);
-
-  ~current_sensor() final override;
+  current_sensor(std::vector<sensor_type>& list, uint8_t i2c_bus_) : sensors_{list}, i2c_bus{i2c_bus_} { }
 
   void measure() final override;
 
+  void add_sensor(const sensor_type& sensor_) final override;
+
   static constexpr inline const char* get_base_sensor_name() { return base_sensor_name; }
 
-  void add_sensor(const sensor_name& name, const measurement_result& meas) final override;
-
-  void add_sensor(const sensor_name& name, const std::string& sensor_addr) final override;
-
 private:
-  std::unordered_map<sensor_name, measurement_result> current_sensors;
-
   static constexpr const char* base_sensor_name { "CUR" };
+  
+  std::vector<sensor_type> sensors_;
+
+  i2c_comm i2c_bus;
 };
 
 } // namespace eekhdv

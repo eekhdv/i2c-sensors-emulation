@@ -4,37 +4,31 @@
  * @author Edem Khadiev
  * Contact: khadiev.edem@gmail.com
  */
+#include <iostream>
+
 #include "sensors/current_sensor.hpp"
 
 
 using namespace eekhdv;
 
 
-current_sensor::current_sensor(std::initializer_list<std::pair<sensor_name, measurement_result>>& list)
-{
-    for (const auto & [key, value] : list)
-    {
-        current_sensors[key] = value;
-    }
-}
-
-current_sensor::~current_sensor()
-{
-    // TODO
-}
-
 void current_sensor::measure()
 {
-  
+    for (auto & sensor_ : sensors_)
+    {
+      uint8_t rx_buf[8];
+      if (i2c_bus.read(sensor_, 8, rx_buf) == 0)
+      {
+        sensor_.set_last_meas(i2c_comm::bytes_to_int64(rx_buf));
+      }
+      else
+      {
+        std::cout << "Cannot measure " << sensor_.get_sensor_name() << '\n';
+      }
+    }
 }
   
-void current_sensor::add_sensor(const sensor_name& name, const measurement_result& meas)
+void current_sensor::add_sensor(const sensor_type& sensor)
 {
-  current_sensors[name] = meas;
-}
-
-void current_sensor::add_sensor(const sensor_name& name, const std::string& sensor_addr)
-{
-  measurement_result res{sensor_addr};
-  add_sensor(name, res);
+  sensors_.push_back(sensor);
 }

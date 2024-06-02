@@ -4,37 +4,32 @@
  * @author Edem Khadiev
  * Contact: khadiev.edem@gmail.com
  */
+#include <iostream>
+
 #include "sensors/power_sensor.hpp"
 
 
 using namespace eekhdv;
 
 
-power_sensor::power_sensor(std::initializer_list<std::pair<sensor_name, measurement_result>>& list)
+void power_sensor::measure()
 {
-    for (const auto & [key, value] : list)
+  for (auto & sensor_ : sensors_)
     {
-        power_sensors[key] = value;
+      uint8_t rx_buf[8];
+      if (i2c_bus.read(sensor_, 8, rx_buf) == 0)
+      {
+        sensor_.set_last_meas(i2c_comm::bytes_to_int64(rx_buf));
+      }
+      else
+      {
+        std::cout << "Cannot measure " << sensor_.get_sensor_name() << '\n';
+      }
     }
 }
 
-power_sensor::~power_sensor()
+void power_sensor::add_sensor(const sensor_type& sensor)
 {
-    // TODO
+  sensors_.push_back(sensor);
 }
 
-void power_sensor::measure()
-{
-  
-}
-
-void power_sensor::add_sensor(const sensor_name& name, const measurement_result& meas)
-{
-  power_sensors[name] = meas;
-}
-
-void power_sensor::add_sensor(const sensor_name& name, const std::string& sensor_addr)
-{
-  measurement_result res{sensor_addr};
-  add_sensor(name, res);
-}
