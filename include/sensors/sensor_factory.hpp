@@ -16,7 +16,8 @@ namespace eekhdv
     class sensor_factory
     {
     public:
-        /// @brief return ptr to sensor instance
+        /// @brief return ptr to the sensor instance
+        /// @param cfg - configuration for creating instance
         static std::unique_ptr<sensor> make_sensor(const sensor_configuration& cfg);
     };
 }

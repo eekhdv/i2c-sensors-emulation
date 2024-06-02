@@ -12,17 +12,18 @@ namespace eekhdv
 {
 
 /*
- *
+ * Base sensor class
 **/
 class sensor
 {
 public:
   virtual ~sensor() = default;
 
-  /// @brief 
-  /// @return
+  /// @brief Method for update measurements from sensor
   virtual void measure() = 0;
 
+  /// @brief Add new sensor to the sensor array
+  /// @param sensor_type - sensor to be added
   virtual void add_sensor(const sensor_type&) = 0;
 
 };

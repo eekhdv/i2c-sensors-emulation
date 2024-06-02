@@ -1,6 +1,4 @@
 #include <cstdint>
-#include <linux/i2c-dev.h>
-#include <i2c/smbus.h>
 #include <memory>
 
 #include "sensors/sensor_factory.hpp"
@@ -8,6 +6,11 @@
 
 int main (int argc, char *argv[])
 {
+  constexpr uint8_t temp_bus { 0x09 };
+  constexpr uint8_t vol_bus  { 0x0A };
+  constexpr uint8_t pow_bus  { 0x08 };
+  constexpr uint8_t cur_bus  { 0x07 };
+
   eekhdv::sensor_configuration cfg = {
     .sensor_list = {
       {"TMP01",  8},
@@ -31,10 +34,7 @@ int main (int argc, char *argv[])
       {"CUR11", 27},
       {"CUR15", 28}
     },
-    .temperature_bus = 0x09,
-    .voltage_bus = 0x0A,
-    .power_bus = 0x08,
-    .current_bus = 0x07,
+    .bus_arr = {temp_bus, vol_bus, pow_bus, cur_bus},
   };
   
   std::unique_ptr<eekhdv::sensor> sensors = eekhdv::sensor_factory::make_sensor(cfg);

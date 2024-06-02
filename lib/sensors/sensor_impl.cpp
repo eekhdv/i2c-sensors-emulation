@@ -4,7 +4,6 @@
  * @author Edem Khadiev
  * Contact: khadiev.edem@gmail.com
  */
-#include <iostream>
 #include <memory>
 #include <string>
 #include <vector>
@@ -20,10 +19,10 @@ using namespace eekhdv;
 
 sensor_impl::sensor_impl(const sensor_configuration& cfg)
 {
-  std::unique_ptr<temperature_sensor> tmp_sensor {new temperature_sensor{cfg.temperature_bus}};
-  std::unique_ptr<voltage_sensor>     vol_sensor {new voltage_sensor{cfg.voltage_bus}};
-  std::unique_ptr<power_sensor>       pow_sensor {new power_sensor{cfg.power_bus}};
-  std::unique_ptr<current_sensor>     cur_sensor {new current_sensor{cfg.current_bus}};
+  std::unique_ptr<temperature_sensor> tmp_sensor {new temperature_sensor{cfg.bus_arr[static_cast<size_t>(MEASUREMENTS::TEMPERATURE)]}};
+  std::unique_ptr<voltage_sensor>     vol_sensor {new voltage_sensor{cfg.bus_arr[static_cast<size_t>(MEASUREMENTS::VOLTAGE)]}};
+  std::unique_ptr<power_sensor>       pow_sensor {new power_sensor{cfg.bus_arr[static_cast<size_t>(MEASUREMENTS::POWER)]}};
+  std::unique_ptr<current_sensor>     cur_sensor {new current_sensor{cfg.bus_arr[static_cast<size_t>(MEASUREMENTS::CURRENT)]}};
   
 
   for (const auto & [name, addr] : cfg.sensor_list)

@@ -21,11 +21,11 @@ namespace eekhdv
 class current_sensor final : public sensor
 {
 public:
-  /// @brief 
-  /// @param list 
-  current_sensor(uint8_t i2c_bus_) : sensors_{}, i2c_bus{i2c_bus_} { }
+  current_sensor(uint8_t i2c_bus_) : sensors_{}, i2c_bus{i2c_bus_}
+  { }
 
-  current_sensor(std::vector<sensor_type>& list, uint8_t i2c_bus_) : sensors_{list}, i2c_bus{i2c_bus_} { }
+  current_sensor(std::vector<sensor_type>& list, uint8_t i2c_bus_) : sensors_{list}, i2c_bus{i2c_bus_}
+  { }
 
   void measure() final override;
 

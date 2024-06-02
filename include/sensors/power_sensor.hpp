@@ -21,8 +21,6 @@ namespace eekhdv
 class power_sensor final : public sensor
 {
 public:
-  /// @brief 
-  /// @param list
   power_sensor(uint8_t i2c_bus_) : sensors_{}, i2c_bus{i2c_bus_}
   { }
 
@@ -31,7 +29,7 @@ public:
 
   void measure() final override;
 
-  void add_sensor(const sensor_type& sensor) final override;
+  void add_sensor(const sensor_type& sensor_) final override;
 
   static constexpr inline const char* get_base_sensor_name() { return base_sensor_name; }
 

@@ -6,6 +6,9 @@
  */
 #pragma once
 
+#include "sensor_type.hpp"
+#include <array>
+#include <cstdint>
 #include <string>
 #include <utility>
 #include <vector>
@@ -14,15 +17,12 @@ namespace eekhdv
 {
     
 /*
- *
+ * Configuration for factory class
 **/
 struct sensor_configuration
 {
     std::vector<std::pair<std::string, uint8_t>> sensor_list;
-    uint8_t temperature_bus;
-    uint8_t voltage_bus;
-    uint8_t power_bus;
-    uint8_t current_bus;
+    std::array<uint8_t, static_cast<size_t>(eekhdv::MEASUREMENTS::MAX_NUM)> bus_arr;
 };
 
 } // namespace eekhdv

@@ -47,8 +47,11 @@ class sensor_type
 public:
   sensor_type() = delete;
 
-  sensor_type(const std::string& name, uint8_t dev_addr_): meas_history{}, last_meas{}, sensor_name{name}, dev_addr{dev_addr_}
-  {}
+  sensor_type(const std::string& name, uint8_t dev_addr_): meas_history{},
+                                                           last_meas{},
+                                                           sensor_name{name},
+                                                           dev_addr{dev_addr_}
+  { }
 
 public:
   const measurement_type& get_last_meas() const & { return last_meas; }
@@ -57,8 +60,8 @@ public:
 
   uint8_t get_sensor_addr() const { return dev_addr; }
   
-  /// @brief 
-  /// @param result 
+  /// @brief update last measurement
+  /// @param result - new measurement value
   void set_last_meas(int64_t result)
   {
     meas_history.push_back(last_meas);
@@ -67,9 +70,10 @@ public:
   
 private:
   std::vector<measurement_type> meas_history;
-  measurement_type last_meas;
-  std::string      sensor_name;
-  uint8_t          dev_addr;
+  measurement_type              last_meas;
+
+  std::string                   sensor_name;
+  uint8_t                       dev_addr;
 };
 
 }

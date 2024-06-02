@@ -63,7 +63,7 @@ int i2c_comm::read(const sensor_type& sensor, uint32_t buf_size, uint8_t* rx_buf
     {
       for (uint16_t i = 1; i <= data.block[0]; ++i)
       {
-        printf("%d ", data.block[i]);
+        rx_buffer[i] = data.block[i];
       }
       return 0;
     }

@@ -21,20 +21,15 @@ namespace eekhdv
 class voltage_sensor final : public sensor
 {
 public:
-  /// @brief 
-  /// @param i2c_bus_ 
   voltage_sensor(uint8_t i2c_bus_) : sensors_{}, i2c_bus{i2c_bus_}
   { }
 
-  /// @brief 
-  /// @param list 
-  /// @param i2c_bus_ 
   voltage_sensor(std::vector<sensor_type>& list, uint8_t i2c_bus_) : sensors_{list}, i2c_bus{i2c_bus_}
   { }
 
   void measure() final override;
 
-  void add_sensor(const sensor_type& sensor) final override;
+  void add_sensor(const sensor_type& sensor_) final override;
 
   static constexpr inline const char* get_base_sensor_name() { return base_sensor_name; }
 
